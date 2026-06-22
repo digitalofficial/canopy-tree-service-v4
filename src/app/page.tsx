@@ -144,21 +144,10 @@ export default function Home() {
       </nav>
 
       {/* ============================================
-          A) HERO — STICKY, FADES ON SCROLL
+          A) HERO — FADES ON SCROLL
           ============================================ */}
-      <div style={{ height: "200vh", position: "relative" }}>
         <section
-          className="hero-sticky"
-          style={{
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            overflow: "hidden",
-            zIndex: 1,
-          }}
+          className="hero-section"
         >
           {/* Hero background image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -176,38 +165,36 @@ export default function Home() {
             style={{ top: "20%", left: "50%", marginLeft: "-250px" }}
           />
 
-          <h1
-            style={{
-              fontFamily: "var(--font-display), 'Space Grotesk', sans-serif",
-              fontSize: "clamp(2.8rem, 8vw, 7rem)",
-              fontWeight: 700,
-              lineHeight: 1.05,
-              maxWidth: "900px",
-              padding: "0 24px",
-              position: "relative",
-              zIndex: 2,
-            }}
-          >
-            Your trees
-            <br />
-            <span style={{ color: "#4ADE80" }}>deserve better.</span>
-          </h1>
+          <div className="hero-content" style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display), 'Space Grotesk', sans-serif",
+                fontSize: "clamp(2.8rem, 8vw, 7rem)",
+                fontWeight: 700,
+                lineHeight: 1.05,
+                maxWidth: "900px",
+                padding: "0 24px",
+              }}
+            >
+              Your trees
+              <br />
+              <span style={{ color: "#4ADE80" }}>deserve better.</span>
+            </h1>
 
-          <p
-            style={{
-              fontFamily: "var(--font-body), 'Inter', sans-serif",
-              fontSize: "clamp(1rem, 2vw, 1.25rem)",
-              color: "#6B8068",
-              marginTop: "24px",
-              maxWidth: "500px",
-              padding: "0 24px",
-              position: "relative",
-              zIndex: 2,
-            }}
-          >
-            Professional tree care in Tucson, AZ. Trimming, removal,
-            emergency response -- done right.
-          </p>
+            <p
+              style={{
+                fontFamily: "var(--font-body), 'Inter', sans-serif",
+                fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                color: "#6B8068",
+                marginTop: "24px",
+                maxWidth: "500px",
+                padding: "0 24px",
+              }}
+            >
+              Professional tree care in Tucson, AZ. Trimming, removal,
+              emergency response -- done right.
+            </p>
+          </div>
 
           {/* Scroll indicator */}
           <div
@@ -230,7 +217,6 @@ export default function Home() {
             <ArrowDown size={18} />
           </div>
         </section>
-      </div>
 
       {/* ============================================
           B) SERVICES FLOW

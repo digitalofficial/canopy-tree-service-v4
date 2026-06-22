@@ -135,21 +135,26 @@ img {
 }
 
 /* ============================================
-   5. STICKY HERO THAT FADES ON SCROLL
+   5. HERO SECTION — SCROLL FADE VIA JS
    ============================================ */
-@supports (animation-timeline: scroll()) {
-  .hero-sticky {
-    position: sticky;
-    top: 0;
-    animation: hero-fade linear both;
-    animation-timeline: scroll();
-    animation-range: 0px 600px;
-  }
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
 
-  @keyframes hero-fade {
-    from { opacity: 1; transform: scale(1); filter: blur(0px); }
-    to { opacity: 0; transform: scale(0.95); filter: blur(8px); }
-  }
+.hero-section .hero-content {
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+}
+
+.hero-section.scrolled-past .hero-content {
+  opacity: 0;
+  transform: scale(0.97);
+  filter: blur(6px);
 }
 
 /* ============================================
@@ -396,9 +401,6 @@ img {
     transform: translateY(0);
   }
 
-  .hero-sticky {
-    position: relative;
-  }
 }
 
 /* ============================================
@@ -434,8 +436,8 @@ img {
     filter: none !important;
   }
 
-  .hero-sticky {
-    position: relative;
+  .hero-section .hero-content {
+    transition: none !important;
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
