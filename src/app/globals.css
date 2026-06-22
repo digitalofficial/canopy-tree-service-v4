@@ -1,0 +1,474 @@
+/* ============================================
+   CANOPY TREE SERVICE — V4 GLOBALS
+   Scroll-driven, seamless flow design
+   ============================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --base: #0A120A;
+  --surface: #121A12;
+  --primary: #4ADE80;
+  --secondary: #92400E;
+  --tertiary: #7DD3FC;
+  --glow: rgba(74, 222, 128, 0.15);
+  --text: #F0FFF0;
+  --muted: #6B8068;
+  --radius: 16px;
+  --radius-sm: 8px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--base);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- @property for animated gradient --- */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ============================================
+   1. SCROLL-DRIVEN PARALLAX
+   ============================================ */
+@supports (animation-timeline: scroll()) {
+  .parallax-slow {
+    animation: parallax-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%;
+  }
+
+  .parallax-slow-deep {
+    animation: parallax-up-deep linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 60%;
+  }
+
+  @keyframes parallax-up {
+    from { transform: translateY(60px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes parallax-up-deep {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+}
+
+/* ============================================
+   2. TEXT REVEAL ON SCROLL
+   ============================================ */
+@supports (animation-timeline: view()) {
+  .text-reveal {
+    animation: clip-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 40%;
+  }
+
+  .text-reveal-slow {
+    animation: clip-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 50%;
+  }
+
+  @keyframes clip-reveal {
+    from { clip-path: inset(0 100% 0 0); opacity: 0; }
+    to { clip-path: inset(0 0% 0 0); opacity: 1; }
+  }
+}
+
+/* ============================================
+   3. ANIMATED GRADIENT
+   ============================================ */
+.animated-gradient {
+  background: conic-gradient(from var(--gradient-angle), #4ADE80, #7DD3FC, #4ADE80);
+  animation: gradient-rotate 6s linear infinite;
+}
+
+@keyframes gradient-rotate {
+  to { --gradient-angle: 360deg; }
+}
+
+/* ============================================
+   4. SEAMLESS FLOW BACKGROUNDS
+   ============================================ */
+.flow-section {
+  position: relative;
+  padding: 8rem 0;
+}
+
+.flow-dark {
+  background: linear-gradient(180deg, #0A120A 0%, #121A12 50%, #0A120A 100%);
+}
+
+.flow-glow {
+  background: linear-gradient(180deg, #0A120A, rgba(74, 222, 128, 0.03) 50%, #0A120A);
+}
+
+.flow-deep {
+  background: linear-gradient(180deg, #0A120A, rgba(18, 26, 18, 0.8) 30%, rgba(74, 222, 128, 0.02) 50%, rgba(18, 26, 18, 0.8) 70%, #0A120A);
+}
+
+/* ============================================
+   5. STICKY HERO THAT FADES ON SCROLL
+   ============================================ */
+@supports (animation-timeline: scroll()) {
+  .hero-sticky {
+    position: sticky;
+    top: 0;
+    animation: hero-fade linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 600px;
+  }
+
+  @keyframes hero-fade {
+    from { opacity: 1; transform: scale(1); filter: blur(0px); }
+    to { opacity: 0; transform: scale(0.95); filter: blur(8px); }
+  }
+}
+
+/* ============================================
+   6. HOLOGRAPHIC CARD WITH MOUSE TRACKING
+   ============================================ */
+.holo-card {
+  --x: 50%;
+  --y: 50%;
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.4s ease, transform 0.4s ease;
+}
+
+.holo-card:hover {
+  border-color: rgba(74, 222, 128, 0.15);
+  transform: translateY(-2px);
+}
+
+.holo-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 200px at var(--x) var(--y), rgba(74, 222, 128, 0.08), transparent);
+  pointer-events: none;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.holo-card:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   7. GLASS ICON CONTAINER
+   ============================================ */
+.glass-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.12), rgba(74, 222, 128, 0.04));
+  border: 1px solid rgba(74, 222, 128, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+}
+
+.glass-icon svg {
+  width: 26px;
+  height: 26px;
+  color: var(--primary);
+}
+
+/* ============================================
+   8. STAT SCALE-IN ON SCROLL
+   ============================================ */
+@supports (animation-timeline: view()) {
+  .stat-scale {
+    animation: stat-enter linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 45%;
+  }
+
+  @keyframes stat-enter {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+}
+
+/* ============================================
+   9. GLASS INPUTS
+   ============================================ */
+.glass-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-input::placeholder {
+  color: var(--muted);
+}
+
+.glass-input:focus {
+  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.08);
+}
+
+.glass-input option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* ============================================
+   10. MAGNETIC BUTTON
+   ============================================ */
+.magnetic-btn {
+  --btn-x: 0px;
+  --btn-y: 0px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 40px;
+  background: var(--primary);
+  color: var(--base);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transform: translate(var(--btn-x), var(--btn-y));
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.magnetic-btn:hover {
+  background: #5BF093;
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.3), 0 0 60px rgba(74, 222, 128, 0.1);
+}
+
+/* ============================================
+   11. WORD-BY-WORD REVEAL
+   ============================================ */
+@supports (animation-timeline: view()) {
+  .word-reveal {
+    animation: word-fade-in linear both;
+    animation-timeline: view();
+    animation-range: entry 15% cover 40%;
+  }
+
+  @keyframes word-fade-in {
+    from { opacity: 0.15; filter: blur(2px); }
+    to { opacity: 1; filter: blur(0px); }
+  }
+}
+
+/* ============================================
+   12. QUOTE CLIP REVEAL
+   ============================================ */
+@supports (animation-timeline: view()) {
+  .quote-reveal {
+    animation: quote-clip linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 50%;
+  }
+
+  @keyframes quote-clip {
+    from { clip-path: inset(0 0 100% 0); opacity: 0; }
+    to { clip-path: inset(0 0 0% 0); opacity: 1; }
+  }
+}
+
+/* ============================================
+   13. FADE-IN ON SCROLL
+   ============================================ */
+@supports (animation-timeline: view()) {
+  .fade-in-scroll {
+    animation: fade-in-view linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+
+  @keyframes fade-in-view {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ============================================
+   14. GLOW ORB
+   ============================================ */
+.glow-orb {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.12) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  animation: orb-drift 12s ease-in-out infinite alternate;
+}
+
+@keyframes orb-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.1); }
+  66% { transform: translate(-40px, 30px) scale(0.95); }
+  100% { transform: translate(20px, -20px) scale(1.05); }
+}
+
+/* ============================================
+   15. SCROLL INDICATOR
+   ============================================ */
+.scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ============================================
+   16. INTERSECTION OBSERVER FALLBACK
+   ============================================ */
+@supports not (animation-timeline: scroll()) {
+  .parallax-slow,
+  .parallax-slow-deep,
+  .text-reveal,
+  .text-reveal-slow,
+  .stat-scale,
+  .word-reveal,
+  .quote-reveal,
+  .fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .parallax-slow.in-view,
+  .parallax-slow-deep.in-view,
+  .text-reveal.in-view,
+  .text-reveal-slow.in-view,
+  .stat-scale.in-view,
+  .word-reveal.in-view,
+  .quote-reveal.in-view,
+  .fade-in-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-sticky {
+    position: relative;
+  }
+}
+
+/* ============================================
+   17. REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .glow-orb {
+    animation: none;
+  }
+
+  .scroll-indicator {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .parallax-slow,
+  .parallax-slow-deep,
+  .text-reveal,
+  .text-reveal-slow,
+  .stat-scale,
+  .word-reveal,
+  .quote-reveal,
+  .fade-in-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    filter: none !important;
+  }
+
+  .hero-sticky {
+    position: relative;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* ============================================
+   18. UTILITY
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================
+   19. RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .flow-section {
+    padding: 5rem 0;
+  }
+
+  .glow-orb {
+    width: 300px;
+    height: 300px;
+  }
+}
