@@ -160,6 +160,16 @@ export default function Home() {
             zIndex: 1,
           }}
         >
+          {/* Hero background image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1600&h=900&fit=crop"
+            alt="Tall trees viewed from below looking up at the canopy"
+            className="absolute inset-0 w-full h-full object-cover"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A120A]/80 via-[#0A120A]/60 to-[#0A120A]/90" />
+
           {/* Glow orb */}
           <div
             className="glow-orb"
