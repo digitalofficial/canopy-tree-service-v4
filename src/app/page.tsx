@@ -157,7 +157,7 @@ export default function Home() {
             className="absolute inset-0 w-full h-full object-cover"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A120A]/80 via-[#0A120A]/60 to-[#0A120A]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A120A]/55 via-[#0A120A]/35 to-[#0A120A]/70" />
 
           {/* Glow orb */}
           <div
